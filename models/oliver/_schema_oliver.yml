@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: oliver_dim_customer
+    description: "One row per customer."
+    columns:
+      - name: cust_key
+        tests: [unique, not_null]
+
+  - name: oliver_dim_employee
+    description: "One row per employee."
+    columns:
+      - name: employee_key
+        tests: [unique, not_null]
+
+  - name: oliver_dim_product
+    description: "One row per product."
+    columns:
+      - name: product_key
+        tests: [unique, not_null]
+
+  - name: oliver_dim_store
+    description: "One row per store."
+    columns:
+      - name: store_key
+        tests: [unique, not_null]
+
+  - name: oliver_dim_date
+    description: "One row per order date."
+    columns:
+      - name: date_key
+        tests: [unique, not_null]
+
+  - name: fact_sales
+    description: "One row per product on each order."
