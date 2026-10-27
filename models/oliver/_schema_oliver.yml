@@ -33,3 +33,14 @@ models:
 
   - name: fact_sales
     description: "One row per product on each order."
+
+  - name: stg_employee_certifications
+    description: |
+      Staging model for employee certification data.
+      Parses certification_json into certification_name, certification_cost,
+      and certification_awarded_date. One row per certification awarded to an employee.
+  - name: fact_certification
+    description: |
+      Employee Certification Fact.
+      The grain of this table is employee + certification + date awarded.
+      Each record represents one certification an employee received on a given date, with its cost.
