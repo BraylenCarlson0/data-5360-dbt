@@ -33,14 +33,40 @@ models:
 
   - name: fact_sales
     description: "One row per product on each order."
+    columns:
+      - name: cust_key
+        tests:
+          - not_null
 
   - name: stg_employee_certifications
     description: |
       Staging model for employee certification data.
       Parses certification_json into certification_name, certification_cost,
       and certification_awarded_date. One row per certification awarded to an employee.
+    columns:
+      - name: certification_name
+        tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - "Strategic Retail Operations"
+                  - "Workplace Safety"
+                  - "Cash Handling and Security"
+                  - "Point of Sale Operations"
+                  - "Inventory Management"
+                  - "Conflict Resolution"
+                  - "Customer Service Excellence"
+                  - "Product Knowledge Level 2"
+                  - "Leadership and Coaching"
   - name: fact_certification
     description: |
       Employee Certification Fact.
       The grain of this table is employee + certification + date awarded.
       Each record represents one certification an employee received on a given date, with its cost.
+    columns:
+      - name: employee_key
+        tests:
+          - relationships:
+              arguments:
+                to: ref('oliver_dim_employee')
+                field: employee_key
